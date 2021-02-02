@@ -16,8 +16,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.io.File
 
-
-@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class MainActivity : AppCompatActivity() {
 
     companion object{
@@ -42,14 +40,7 @@ class MainActivity : AppCompatActivity() {
         val selectMultipleImageButton = findViewById<Button>(R.id.multiple_image)
 
         selectMultipleImageButton.setOnClickListener {
-            val intent = Intent()
-            intent.type = "image/*"
-            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-            intent.action = Intent.ACTION_GET_CONTENT
-            startActivityForResult(
-                Intent.createChooser(intent, "Select Picture"),
-                PICK_FROM_GALLERY
-            )
+            openGalleryForImage()
         }
 
 
@@ -66,6 +57,17 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
+    private fun openGalleryForImage(){
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(
+                Intent.createChooser(intent, "Select Picture"),
+                PICK_FROM_GALLERY
+        )
+    }
 
     private fun hasPermission() : Boolean{
 

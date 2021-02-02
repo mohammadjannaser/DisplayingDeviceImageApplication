@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
-public class ImageAdapter() : RecyclerView.Adapter<ImageAdapter.MyViewHolder>() {
+class ImageAdapter : RecyclerView.Adapter<ImageAdapter.MyViewHolder>() {
 
-    var data : List<String?> = arrayListOf()
+    var data : MutableList<String> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_image, null))
@@ -29,8 +29,12 @@ public class ImageAdapter() : RecyclerView.Adapter<ImageAdapter.MyViewHolder>() 
     override fun getItemCount(): Int {
         return data.size
     }
+    fun setImage(item : String){
+        this.data.add(item)
+        notifyDataSetChanged()
+    }
 
-    public fun setImageList(items: MutableList<String?>){
+    fun setImageList(items: MutableList<String>){
         this.data = items
         notifyDataSetChanged()
     }
@@ -38,7 +42,5 @@ public class ImageAdapter() : RecyclerView.Adapter<ImageAdapter.MyViewHolder>() 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageView = itemView.findViewById(R.id.image_view) as ImageView
         val title = itemView.findViewById(R.id.title) as TextView
-
-
     }
 }
